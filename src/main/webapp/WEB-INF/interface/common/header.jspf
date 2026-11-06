@@ -1,0 +1,23 @@
+<header>
+    <nav aria-label="Điều hướng chính">
+        <a href="${pageContext.request.contextPath}/home"
+           aria-current="${activePage eq 'home' ? 'page' : 'false'}">
+            Trang chủ
+        </a>
+
+        <a href="${pageContext.request.contextPath}/schedule"
+           aria-current="${activePage eq 'schedule' ? 'page' : 'false'}">
+            Lịch sân
+        </a>
+
+        <a href="${pageContext.request.contextPath}/booking/history"
+           aria-current="${activePage eq 'history' ? 'page' : 'false'}">
+            Lịch sử đặt vé
+        </a>
+
+        <a href="${pageContext.request.contextPath}/auth/login"
+           aria-current="${activePage eq 'login' ? 'page' : 'false'}">
+            Đăng nhập
+        </a>
+    </nav>
+</header>

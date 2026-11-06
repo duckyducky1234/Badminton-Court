@@ -1,0 +1,24 @@
+<dialog id="booking-dialog" aria-labelledby="booking-dialog-title">
+    <h2 id="booking-dialog-title">Thông tin đặt sân</h2>
+
+    <dl>
+        <dt>Ngày</dt>
+        <dd id="booking-date"></dd>
+
+        <dt>Sân</dt>
+        <dd id="booking-court"></dd>
+
+        <dt>Khung giờ</dt>
+        <dd id="booking-time"></dd>
+    </dl>
+
+    <p>Bạn cần đăng nhập để tiếp tục đặt sân.</p>
+
+    <a href="${pageContext.request.contextPath}/auth/login">
+        Đăng nhập
+    </a>
+
+    <form method="dialog">
+        <button type="submit">Đóng</button>
+    </form>
+</dialog>
