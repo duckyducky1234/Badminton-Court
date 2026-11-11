@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+             http://maven.apache.org/POM/4.0.0
+             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Phiên bản cấu trúc file POM của Maven -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Thông tin định danh dự án -->
+    <groupId>com.ducky.booking</groupId>
+    <artifactId>badminton-booking</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Badminton Booking</name>
+
+    <!-- Đóng gói ứng dụng web thành file .war để chạy trên Tomcat -->
+    <packaging>war</packaging>
+
+    <properties>
+        <!-- Biên dịch code theo Java 21 -->
+        <maven.compiler.release>21</maven.compiler.release>
+
+        <!-- Đọc mã nguồn bằng UTF-8, hỗ trợ tiếng Việt -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Dùng cùng một phiên bản cho hai thư viện ZXing -->
+        <zxing.version>3.5.4</zxing.version>
+    </properties>
+
+    <!-- Các thư viện mà code của dự án sử dụng -->
+    <dependencies>
+
+        <!-- Servlet: viết doGet, doPost, xử lý request và session -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+
+            <!-- Tomcat cung cấp thư viện này khi chạy ứng dụng -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- API của JSP: Tomcat cung cấp phần thực thi -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSTL API: hỗ trợ các thẻ như c:if, c:forEach, c:out -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!-- Phần thực thi JSTL, được đưa vào ứng dụng -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- JDBC driver: giúp Java kết nối và gửi SQL tới PostgreSQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.14</version>
+        </dependency>
+
+        <!-- ZXing Core: mã hóa và giải mã nội dung QR -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+
+        <!-- ZXing JavaSE: hỗ trợ xuất QR thành ảnh PNG -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+
+        <!-- JUnit 5: viết các bài kiểm tra trong src/test/java -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.13.4</version>
+
+            <!-- Chỉ sử dụng khi biên dịch và chạy test -->
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- Các công cụ Maven dùng để biên dịch, kiểm tra và đóng gói -->
+    <build>
+
+        <!-- Tên file kết quả: target/badminton-booking.war -->
+        <finalName>badminton-booking</finalName>
+
+        <plugins>
+
+            <!-- Biên dịch code Java theo cấu hình Java 21 phía trên -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.16.0</version>
+            </plugin>
+
+            <!-- Chạy các bài kiểm tra JUnit khi dùng mvn test/package -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.6.1</version>
+            </plugin>
+
+            <!-- Đóng gói code, JSP, CSS, JS và thư viện thành WAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.5.1</version>
+
+                <configuration>
+                    <!-- Cho phép build ở bước đầu khi chưa viết web.xml -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
