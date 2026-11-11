@@ -1,23 +1,35 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <header>
     <nav aria-label="Điều hướng chính">
         <a href="${pageContext.request.contextPath}/home"
-           aria-current="${activePage eq 'home' ? 'page' : 'false'}">
-            Trang chủ
-        </a>
-
+           aria-current="${activePage eq 'home' ? 'page' : 'false'}">Trang chủ</a>
         <a href="${pageContext.request.contextPath}/schedule"
-           aria-current="${activePage eq 'schedule' ? 'page' : 'false'}">
-            Lịch sân
-        </a>
-
-        <a href="${pageContext.request.contextPath}/booking/history"
-           aria-current="${activePage eq 'history' ? 'page' : 'false'}">
-            Lịch sử đặt vé
-        </a>
-
-        <a href="${pageContext.request.contextPath}/auth/login"
-           aria-current="${activePage eq 'login' ? 'page' : 'false'}">
-            Đăng nhập
-        </a>
+           aria-current="${activePage eq 'schedule' ? 'page' : 'false'}">Lịch sân</a>
+        <c:choose>
+            <c:when test="${empty sessionScope.account}">
+                <a href="${pageContext.request.contextPath}/auth/login"
+                   aria-current="${activePage eq 'login' ? 'page' : 'false'}">Đăng nhập</a>
+                <a href="${pageContext.request.contextPath}/auth/register"
+                   aria-current="${activePage eq 'register' ? 'page' : 'false'}">Đăng ký</a>
+            </c:when>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/booking/history"
+                   aria-current="${activePage eq 'history' ? 'page' : 'false'}">Lịch sử đặt vé</a>
+                <c:if test="${sessionScope.account.admin}">
+                    <a href="${pageContext.request.contextPath}/admin/bookings"
+                       aria-current="${activePage eq 'admin-bookings' ? 'page' : 'false'}">Quản lý đặt sân</a>
+                    <a href="${pageContext.request.contextPath}/admin/courts"
+                       aria-current="${activePage eq 'admin-courts' ? 'page' : 'false'}">Quản lý sân</a>
+                    <a href="${pageContext.request.contextPath}/admin/checkin"
+                       aria-current="${activePage eq 'admin-checkin' ? 'page' : 'false'}">Check-in</a>
+                </c:if>
+                <form class="logout-form" method="post" action="${pageContext.request.contextPath}/auth/logout">
+                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+                    <span><c:out value="${sessionScope.account.name}" /></span>
+                    <button class="secondary" type="submit">Đăng xuất</button>
+                </form>
+            </c:otherwise>
+        </c:choose>
     </nav>
 </header>

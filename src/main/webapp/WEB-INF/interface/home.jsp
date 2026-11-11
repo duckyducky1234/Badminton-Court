@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="activePage" value="home" />
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -14,29 +17,7 @@
 
 <body>
 
-    <header>
-        <%-- contextPath lấy đường dẫn gốc của ứng dụng --%>
-        <nav aria-label="Điều hướng chính">
-
-            <a href="${pageContext.request.contextPath}/home"
-               aria-current="page">
-                Trang chủ
-            </a>
-
-            <a href="${pageContext.request.contextPath}/schedule">
-                Lịch sân
-            </a>
-
-            <a href="${pageContext.request.contextPath}/booking/history">
-                Lịch sử đặt vé
-            </a>
-
-            <a href="${pageContext.request.contextPath}/auth/login">
-                Đăng nhập
-            </a>
-
-        </nav>
-    </header>
+    <%@ include file="/WEB-INF/interface/common/header.jspf" %>
 
     <main>
 
@@ -75,9 +56,7 @@
 
     </main>
 
-    <footer>
-        <p>Badminton Booking</p>
-    </footer>
+    <%@ include file="/WEB-INF/interface/common/footer.jspf" %>
 
 </body>
 </html>

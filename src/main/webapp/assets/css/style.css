@@ -149,12 +149,159 @@ a:focus-visible {
         margin: 24px auto;
     }
 
-    .hero,
+    .booking,
     .booking-guide {
         padding: 24px;
     }
 
-    .hero h1 {
+    .booking h1 {
         font-size: 32px;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.panel {
+    padding: 24px;
+    border: 1px solid #e0e7e2;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.panel > :first-child {
+    margin-top: 0;
+}
+
+.narrow {
+    width: min(100%, 540px);
+    margin-inline: auto;
+}
+
+.field-list {
+    display: grid;
+    gap: 12px;
+}
+
+.field-list label:not(.checkbox-field) {
+    display: grid;
+    gap: 4px;
+}
+
+.field-list button {
+    justify-self: start;
+}
+
+.inline-form,
+.actions,
+.logout-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.logout-form {
+    margin-left: auto;
+}
+
+input:not([type="checkbox"]),
+button {
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #b9c7be;
+    border-radius: 8px;
+    font: inherit;
+}
+
+input:not([type="checkbox"]) {
+    min-width: 0;
+    max-width: 100%;
+}
+
+button {
+    border-color: #167647;
+    color: #ffffff;
+    background: #167647;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    background: #115c37;
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: default;
+}
+
+button.secondary {
+    color: #115c37;
+    background: #ffffff;
+}
+
+button.secondary:hover:not(:disabled) {
+    background: #e8f5ec;
+}
+
+.message {
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.message.error {
+    color: #862418;
+    background: #ffebe8;
+}
+
+.message.success {
+    color: #115c37;
+    background: #e8f5ec;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+caption {
+    text-align: left;
+    font-weight: 600;
+}
+
+th,
+td {
+    padding: 10px 12px;
+    border: 1px solid #e0e7e2;
+    text-align: left;
+}
+
+thead {
+    background: #e8f5ec;
+}
+
+dt {
+    font-weight: 600;
+}
+
+dd {
+    margin: 0 0 10px;
+}
+
+code {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .logout-form {
+        grid-column: 1 / -1;
+        margin-left: 0;
     }
 }

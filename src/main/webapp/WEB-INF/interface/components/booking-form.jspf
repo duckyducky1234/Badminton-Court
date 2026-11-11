@@ -1,24 +1,34 @@
+<%@ page pageEncoding="UTF-8" %>
 <dialog id="booking-dialog" aria-labelledby="booking-dialog-title">
     <h2 id="booking-dialog-title">Thông tin đặt sân</h2>
-
     <dl>
         <dt>Ngày</dt>
         <dd id="booking-date"></dd>
-
         <dt>Sân</dt>
         <dd id="booking-court"></dd>
-
         <dt>Khung giờ</dt>
         <dd id="booking-time"></dd>
+        <dt>Giá</dt>
+        <dd id="booking-amount"></dd>
     </dl>
 
-    <p>Bạn cần đăng nhập để tiếp tục đặt sân.</p>
-
-    <a href="${pageContext.request.contextPath}/auth/login">
-        Đăng nhập
-    </a>
-
-    <form method="dialog">
-        <button type="submit">Đóng</button>
-    </form>
+    <div class="actions">
+        <c:choose>
+            <c:when test="${empty sessionScope.account}">
+                <a href="${pageContext.request.contextPath}/auth/login">Đăng nhập để đặt sân</a>
+            </c:when>
+            <c:otherwise>
+                <form id="booking-form" method="post" action="${pageContext.request.contextPath}/booking">
+                    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+                    <input type="hidden" name="date" value="${selectedDate}">
+                    <input type="hidden" name="courtId">
+                    <input type="hidden" name="start">
+                    <button type="submit">Giữ chỗ 5 phút</button>
+                </form>
+            </c:otherwise>
+        </c:choose>
+        <form method="dialog">
+            <button class="secondary" type="submit">Đóng</button>
+        </form>
+    </div>
 </dialog>

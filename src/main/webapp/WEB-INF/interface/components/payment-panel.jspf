@@ -1,0 +1,48 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:if test="${booking.status.name() eq 'HELD'}">
+    <h2>Chuyển khoản</h2>
+    <p>
+        Hạn giữ chỗ
+        <time id="payment-expiry" datetime="${booking.expiresAt}">${paymentDeadline}</time>
+        (giờ Việt Nam).
+        <strong id="payment-countdown"></strong>
+    </p>
+
+    <c:choose>
+        <c:when test="${payment.configured}">
+            <section id="payment-instructions">
+                <img class="qr-code" width="260" height="260"
+                     src="${pageContext.request.contextPath}/booking/payment-qr?id=${booking.id}"
+                     alt="Mã QR chuyển khoản cho lượt đặt ${booking.id}">
+                <dl>
+                    <dt>Mã ngân hàng</dt>
+                    <dd><c:out value="${payment.bankId}" /></dd>
+                    <dt>Số tài khoản</dt>
+                    <dd><c:out value="${payment.accountNumber}" /></dd>
+                    <dt>Tên chủ tài khoản</dt>
+                    <dd><c:out value="${payment.accountName}" /></dd>
+                    <dt>Nội dung chuyển khoản</dt>
+                    <dd><code><c:out value="${transferReference}" /></code></dd>
+                </dl>
+            </section>
+        </c:when>
+        <c:otherwise>
+            <p class="message error">Mã QR thanh toán chưa được cấu hình. Vui lòng liên hệ quản lý sân.</p>
+        </c:otherwise>
+    </c:choose>
+
+    <div class="actions">
+        <c:if test="${payment.configured}">
+            <form method="post" action="${pageContext.request.contextPath}/booking/payment">
+                <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+                <input type="hidden" name="id" value="${booking.id}">
+                <button id="report-payment" type="submit">Tôi đã chuyển khoản</button>
+            </form>
+        </c:if>
+        <form method="post" action="${pageContext.request.contextPath}/booking/cancel">
+            <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+            <input type="hidden" name="id" value="${booking.id}">
+            <button class="secondary" type="submit">Hủy giữ chỗ</button>
+        </form>
+    </div>
+</c:if>

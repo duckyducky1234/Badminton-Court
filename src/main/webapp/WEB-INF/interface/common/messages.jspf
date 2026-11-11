@@ -1,0 +1,7 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:if test="${not empty requestScope.error}">
+    <p class="message error" role="alert"><c:out value="${requestScope.error}" /></p>
+</c:if>
+<c:if test="${not empty requestScope.notice}">
+    <p class="message success" role="status"><c:out value="${requestScope.notice}" /></p>
+</c:if>

@@ -1,0 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
+<c:if test="${booking.status.name() eq 'CONFIRMED'}">
+    <details>
+        <summary>Hiển thị vé QR</summary>
+        <p>Đưa mã QR này cho quản lý sân khi đến check-in.</p>
+        <img class="qr-code" width="240" height="240" loading="lazy"
+             src="${pageContext.request.contextPath}/ticket/qr?id=${booking.id}"
+             alt="Vé QR cho lượt đặt ${booking.id}">
+        <p>Mã vé <code><c:out value="${booking.ticketToken}" /></code></p>
+    </details>
+</c:if>
